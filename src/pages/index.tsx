@@ -7,8 +7,15 @@ import { Fragment, useState } from "react";
 
 export default function Home() {
   const [popUp, setPopup] = useState<boolean>(false);
-
+  const [disableBtn, setDisableBtn] = useState<boolean>(true);
   const setDataUserTracking = () => {};
+  const setOnchange = (event: any) => {
+    if (event.target.checked === true) {
+      setDisableBtn(false);
+    } else {
+      setDisableBtn(true);
+    }
+  };
   return (
     <div>
       <div
@@ -23,11 +30,27 @@ export default function Home() {
         </div>
 
         <div className="grid mb-5 mt-5 h-50 mx-5 rounded-lg text-center ">
+          <div className="mb-2">
+            <div className="flex items-center mb-2 mt-2">
+              <input
+                onChange={setOnchange}
+                type="checkbox"
+                value="1"
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+              <label className="ml-2 text-sm font-medium text-gray-900 ">
+                ยอมรับ
+              </label>
+            </div>
+          </div>
           <button
+            disabled={disableBtn}
             onClick={() => {
               setPopup(true);
             }}
-            className="text-white  h-50 rounded-lg text-center cursor-pointer p-2.5 bg-blue-500"
+            className={`bg-ccmu text-white py-3 w-full rounded-xl   ${
+              disableBtn ? "bg-gray-300 " : "bg-ccmu   "
+            }`}
           >
             ลงทะเบียน
           </button>

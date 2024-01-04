@@ -1,14 +1,88 @@
 import Head from "next/head";
+import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { headers } from "next/headers";
 import styles from "@/styles/Home.module.css";
+import axios from "axios";
+import { useParams, useSearchParams } from "next/navigation";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as Setting from "@/redux/reducers/setting";
+import router from "next/router";
 
 export default function Home() {
   const [popUp, setPopup] = useState<boolean>(false);
   const [disableBtn, setDisableBtn] = useState<boolean>(true);
-  const setDataUserTracking = () => {};
+  const [disableBtnsub, setDisableBtnsub] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const dispath = useDispatch();
+  const it = searchParams.get("it");
+  const email = searchParams.get("email");
+  const fname = searchParams.get("fname");
+  const lname = searchParams.get("lname");
+  const org = searchParams.get("org");
+  const stu = searchParams.get("stu");
+  const acctype = searchParams.get("acctype");
+
+  useEffect(() => {
+    dispath(Setting.updateState({ isLoadingScreen: true }));
+    //dispath(User.updateState({ accessToken: search }));
+    checkData();
+  }, [fname]);
+
+  const checkData = async () => {
+    let datasent = {
+      fname: fname,
+      lname: lname,
+    };
+    console.log(datasent);
+    const response = await axios.post(
+      process.env.NEXT_PUBLIC_CMU_SERVICE + `/checkdup`,
+      datasent,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+    console.log(response);
+    if (response.data.count === 0) {
+      dispath(Setting.updateState({ isLoadingScreen: false }));
+      // console.log(response.data.msg);
+    } else {
+      dispath(Setting.updateState({ isLoadingScreen: true }));
+      router.push("/result/Done");
+    }
+  };
+  const setDataUserTracking = async () => {
+    let datasent = {
+      cit_id: acctype,
+      email: email,
+      org_code: org,
+      sts_id: stu,
+      fname: fname,
+      lname: lname,
+      acctype: acctype,
+    };
+    console.log(datasent);
+    const response = await axios.post(
+      process.env.NEXT_PUBLIC_CMU_SERVICE + `/ss`,
+      datasent,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+    console.log(response);
+    if (response.data.status === 1) {
+      console.log(response.data.msg);
+    } else {
+      console.log(response.data.msg);
+    }
+  };
   const setOnchange = (event: any) => {
     if (event.target.checked === true) {
       setDisableBtn(false);
@@ -103,7 +177,7 @@ export default function Home() {
                       <div className="mt-4">
                         <button
                           className="bg-green-500 text-white p-2 rounded-lg cursor-pointer w-full mt-2"
-                          onClick={() => setPopup(false)}
+                          onClick={setDataUserTracking}
                         >
                           ยืนยัน
                         </button>

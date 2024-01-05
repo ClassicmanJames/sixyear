@@ -16,6 +16,7 @@ export default function Home() {
   const [popUp, setPopup] = useState<boolean>(false);
   const [disableBtn, setDisableBtn] = useState<boolean>(true);
   const [disableBtnsub, setDisableBtnsub] = useState<boolean>(false);
+  const [statusType, setStatusType] = useState<number>(1);
   const searchParams = useSearchParams();
   const dispath = useDispatch();
   const it = searchParams.get("it");
@@ -24,18 +25,29 @@ export default function Home() {
   const lname = searchParams.get("lname");
   const org = searchParams.get("org");
   const stu = searchParams.get("stu");
+  const type_p = searchParams.get("type_p");
   const acctype = searchParams.get("acctype");
 
   useEffect(() => {
     dispath(Setting.updateState({ isLoadingScreen: true }));
+    if (fname) {
+      checkData();
+    }
     //dispath(User.updateState({ accessToken: search }));
-    checkData();
   }, [fname]);
 
   const checkData = async () => {
+    // if (stu === "1") {
+    //   setStatusType(1);
+    // } else if (stu === "2") {
+    //   setStatusType(2);
+    // }
+    console.log(stu);
+    console.log(statusType);
     let datasent = {
       fname: fname,
       lname: lname,
+      type_p: type_p,
     };
     console.log(datasent);
     const response = await axios.post(
@@ -48,15 +60,20 @@ export default function Home() {
       }
     );
     console.log(response);
-    if (response.data.count === 0) {
+    if (response.data.status === 1) {
       dispath(Setting.updateState({ isLoadingScreen: false }));
       // console.log(response.data.msg);
-    } else {
+    } else if (response.data.status === 2) {
+      dispath(Setting.updateState({ isLoadingScreen: true }));
+      router.push("/result/Serverfull");
+    } else if (response.data.status === 43) {
       dispath(Setting.updateState({ isLoadingScreen: true }));
       router.push("/result/Done");
     }
   };
   const setDataUserTracking = async () => {
+    setDisableBtnsub(true);
+    dispath(Setting.updateState({ isLoadingScreen: true }));
     let datasent = {
       cit_id: acctype,
       email: email,
@@ -65,8 +82,9 @@ export default function Home() {
       fname: fname,
       lname: lname,
       acctype: acctype,
+      type_p: type_p,
     };
-    console.log(datasent);
+    //console.log(datasent);
     const response = await axios.post(
       process.env.NEXT_PUBLIC_CMU_SERVICE + `/ss`,
       datasent,
@@ -78,9 +96,14 @@ export default function Home() {
     );
     console.log(response);
     if (response.data.status === 1) {
-      console.log(response.data.msg);
-    } else {
-      console.log(response.data.msg);
+      //console.log(response.data.msg);
+      router.push("/result/Done");
+    } else if (response.data.status === 41) {
+      dispath(Setting.updateState({ isLoadingScreen: true }));
+      router.push("/result/Serverfull");
+    } else if (response.data.status === 43) {
+      //console.log(response.data.msg);
+      router.push("/result/Success");
     }
   };
   const setOnchange = (event: any) => {
@@ -176,7 +199,11 @@ export default function Home() {
 
                       <div className="mt-4">
                         <button
-                          className="bg-green-500 text-white p-2 rounded-lg cursor-pointer w-full mt-2"
+                          disabled={disableBtnsub}
+                          className={`text-white p-2 rounded-lg cursor-pointer w-full mt-2   ${
+                            disableBtnsub ? "bg-gray-300 " : "bg-green-500  "
+                          }`}
+                          //   className="bg-green-500 text-white p-2 rounded-lg cursor-pointer w-full mt-2"
                           onClick={setDataUserTracking}
                         >
                           ยืนยัน

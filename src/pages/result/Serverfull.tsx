@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import * as Setting from "@/redux/reducers/setting";
 import { useSelector, useDispatch } from "react-redux";
 
-const Done = () => {
+const Serverfull = () => {
   const dispath = useDispatch();
   dispath(Setting.updateState({ isLoadingScreen: false }));
   const [yearuser, setYearuser] = useState<string>();
@@ -21,12 +21,12 @@ const Done = () => {
           alt={"ssd"}
         ></Image>
       </div>
-      <div className="h-50  rounded-lg  text-green-500  text-center">
-        <div className="bg-green-100 p-2 rounded-lg">
-          คุณได้ลงทะเบียนเสร็จสิ้นกรุณารอการยืนยืนจากระบบ
+      <div className="h-50  rounded-lg  text-red-500  text-center">
+        <div className="bg-red-100 p-2 rounded-lg">
+          ขนาดนี้จำนวนเปิดรับสมัครเต็มจำนวนแล้ว
         </div>
       </div>
     </div>
   );
 };
-export default Done;
+export default Serverfull;

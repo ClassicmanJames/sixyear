@@ -21,8 +21,8 @@ const Done = () => {
         ></Image>
       </div>
       <div className="h-50  rounded-lg  text-green-500  text-center">
-        <div className="bg-green-100 p-2">
-          คุณได้ลงทะเบียนเสร็จสิ้นกรุณารอการยืนยืนจากระบบ
+        <div className="bg-green-100 p-2 rounded-lg">
+          คุณได้ลงทะเบียนไปแล้วกรุณารอการยืนยืนจากระบบ
         </div>
       </div>
     </div>

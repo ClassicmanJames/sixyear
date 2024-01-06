@@ -122,11 +122,20 @@ export default function Home() {
         <div className="grid m-5 h-50 rounded-lg justify-items-center">
           <img src={"/SUBLOGO1.png"} width={"150"} height={"30"} alt={"ssd"} />
         </div>
-        <div className="grid mb-5 mt-5 h-50 mx-5 rounded-lg text-center ">
+        <div className="grid  mt-5 h-50 mx-5 rounded-lg text-center ">
           <p>ลงทะเบียนเข้าร่วมงานคอนเสิร์ต 60 ปี</p>
         </div>
+        <div className="grid m-5 h-50 rounded-lg justify-items-center">
+          <img src={"/bg.png"} width={"550"} alt={"ssd"} />
+        </div>
+        <div className="grid m-5 h-50 rounded-lg text-sm">
+          <p>{"เงื่อนไขการลงทะเบียนรับสิทธิ์"} </p>
+          <p> - 1 คนกดได้ 1 สิทธิ์ </p>
+          <p> - ไม่สามารถโอนต่อให้ผู้อื่นได้ </p>
+          <p> - ทีมงานขอสงวนสิทธิ์ในการพิจารณา - ฯลฯ</p>
+        </div>
 
-        <div className="grid mb-5 mt-5 h-50 mx-5 rounded-lg text-center ">
+        <div className="grid mb-5  h-50 mx-5 rounded-lg text-center ">
           <div className="mb-2">
             <div className="flex items-center mb-2 mt-2">
               <input

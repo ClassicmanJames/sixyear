@@ -43,7 +43,7 @@ export default function Home() {
     // } else if (stu === "2") {
     //   setStatusType(2);
     // }
-    console.log(stu);
+    console.log("citizen_id" + cit_id);
     console.log(statusType);
     let datasent = {
       fname: fname,
@@ -85,7 +85,7 @@ export default function Home() {
       acctype: acctype,
       type_p: type_p,
     };
-    //console.log(datasent);
+    console.log(datasent);
     const response = await axios.post(
       process.env.NEXT_PUBLIC_CMU_SERVICE + `/ss`,
       datasent,

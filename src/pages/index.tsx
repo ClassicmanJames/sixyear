@@ -27,6 +27,7 @@ export default function Home() {
   const stu = searchParams.get("stu");
   const type_p = searchParams.get("type_p");
   const acctype = searchParams.get("acctype");
+  const cit_id = searchParams.get("citizen_id");
 
   useEffect(() => {
     dispath(Setting.updateState({ isLoadingScreen: true }));
@@ -75,7 +76,7 @@ export default function Home() {
     setDisableBtnsub(true);
     dispath(Setting.updateState({ isLoadingScreen: true }));
     let datasent = {
-      cit_id: acctype,
+      cit_id: cit_id,
       email: email,
       org_code: org,
       sts_id: stu,
@@ -122,8 +123,11 @@ export default function Home() {
         <div className="grid m-5 h-50 rounded-lg justify-items-center">
           <img src={"/SUBLOGO1.png"} width={"150"} height={"30"} alt={"ssd"} />
         </div>
-        <div className="text-center mb-5 font-semibold">
+        <div className="text-center mb-2 font-semibold">
           <h1>ลงทะเบียนเข้าร่วมงานคอนเสิร์ต 60 ปี</h1>
+        </div>
+        <div className="text-center mb-5 font-semibold">
+          <h1>(Registration for CMU’s 60-Year Anniversary Concert)</h1>
         </div>
         <div className="flex mb-5 justify-center">
           <img src={"/bg.jpg"} width={"550"} alt={"ssd"} />
@@ -135,126 +139,178 @@ export default function Home() {
           <p className="text-center text-base font-semibold">
             {"สำหรับการเข้าชมคอนเสิร์ต"}
           </p>
+
+          <p className="text-center text-base font-semibold">
+            {"(Conditions for receiving QR code pass)"}
+          </p>
+
           <div className="p-5 pl-8 mt-2 max-h-72 overflow-y-scroll border rounded-xl">
             <ul className="list-disc text-sm ">
               <li>
                 นักศึกษา บุคลากร และนักศึกษาเก่า มหาวิทยาลัยเชียงใหม่
                 สามารถกดรับ QR Code สำหรับการเข้าชมคอนเสิร์ต 1 QR Code ต่อ 1 คน
-                เท่านั้น
+                เท่านั้น (CMU’s students, officers, and alumnus can get only 1
+                QR code/person)
               </li>
+
               <li>
                 QR Code สำหรับการเข้าชมคอนเสิร์ต ไม่สามารถโอนต่อให้ผู้อื่นได้
+                (The QR code pass cannot be transferred to other person)
               </li>
               <li>
                 ไม่มีการจำหน่ายบัตร หรือ QR Code ใด ๆ ทั้งสิ้น
                 ทั้งนี้ผู้จัดงานไม่รับผิดชอบใดๆ
-                ทั้งสิ้นในกรณีที่มีความเสียหายเกิดขึ้น
+                ทั้งสิ้นในกรณีที่มีความเสียหายเกิดขึ้น (There is no ticket or QR
+                code pass selling. The organizer will not cover any financial
+                damages. )
               </li>
 
               <li>
                 ทีมงานขอสงวนสิทธิ์ในการพิจารณายกเลิกสิทธิ
                 หากไม่ปฎิบัติตามกฎกติกา มีการทุจริต
-                หรือส่อเจตนาทุจริตในการร่วมกิจกรรม
+                หรือส่อเจตนาทุจริตในการร่วมกิจกรรม (The organizer team has
+                authority to revoke the pass in case of violation to rules,
+                cheat, or intension to do so. )
               </li>
             </ul>
             <p className="text-base font-semibold mt-4">
-              มาตรการการรับชมคอนเสิร์ต
+              มาตรการการรับชมคอนเสิร์ต (Measures for Attending the Concert)
             </p>
             <ul className="list-disc text-sm ">
               <li>
                 ผู้เข้าชม ต้องมี QR Code สำหรับการเข้าชมคอนเสิร์ต 1 QR Code ต่อ
-                1 คนเท่านั้น
+                1 คนเท่านั้น (The QR code must be present; 1 QR code/person
+                only.)
               </li>
-              <li>ไม่สามารถใช้รูปจากการแคปหน้าจอได้</li>
-              <li>QR Code ที่สแกนเข้างานแล้ว จะไม่สามารถใช้ได้อีก</li>
+              <li>
+                ไม่สามารถใช้รูปจากการแคปหน้าจอได้ (Screenshot of the QR code
+                cannot be used.)
+              </li>
+              <li>
+                QR Code ที่สแกนเข้างานแล้ว จะไม่สามารถใช้ได้อีก (QR code that is
+                already scanned cannot be reused.)
+              </li>
 
               <li>
-                เป็นคอนเสิร์ตแบบยืนในพื้นที่จำกัด
-                (งดเว้นการนำเสื่อและเก้าอี้มาใช้ภายในพื้นที่ชมคอนเสิร์ต)
+                เป็นคอนเสิร์ตแบบยืนในพื้นที่จำกัด(งดเว้นการนำเสื่อและเก้าอี้มาใช้ภายในพื้นที่ชมคอนเสิร์ต)
+                (The audience is required to stand up in the concert area (mats
+                and chairs are not allowed).)
               </li>
 
-              <li>เริ่มเปิดประตูทางเข้า เวลา 15.30 น.</li>
+              <li>
+                เริ่มเปิดประตูทางเข้า เวลา 15.30 น.(Entrance gate opens at 3.30
+                PM.)
+              </li>
               <li>
                 มีจุดตรวจกระเป๋าบริเวณทางเข้า
                 *กรุณาให้ความร่วมมือในการตรวจค้นก่อนเข้าภายในงาน* (หมายเหตุ :
-                ผู้จัดไม่มีการรับฝากของ ขออภัยในความไม่สะดวก)
+                ผู้จัดไม่มีการรับฝากของ ขออภัยในความไม่สะดวก) (Security check is
+                at the entrance. Please kindly cooperate before entering the
+                concert. (Note: There is no left belonging service. Apologize
+                for the inconvenience.))
               </li>
-              <li>เริ่มเปิดประตูทางเข้า เวลา 15.30 น.</li>
+
               <li>
                 โปรดระมัดระวังทรัพย์สินของมีค่า
-                ผู้จัดงานจะไม่รับผิดชอบหากมีการชำรุดหรือสูญหาย
+                ผู้จัดงานจะไม่รับผิดชอบหากมีการชำรุดหรือสูญหาย (Please beware of
+                your belongings. The organizer is not responsible for damage or
+                loss.)
               </li>
               <li>
                 เพื่อความสะดวกรวดเร็วในการเข้าชมคอนเสิร์ต
                 แนะนำให้ผู้เข้าชมเตรียมเปิด QR Code จาก device ของตนเอง
-                ในระหว่างการรอคิว.
+                ในระหว่างการรอคิว. (For your convenience, it is recommended to
+                open and prepare the QR code during in queue line. )
               </li>
               <li>
                 ด้านนอกมีบูธจำหน่ายอาหาร และสุขาเคลื่อนที่
                 หากท่านออกจากพื้นที่ชมคอนเสิร์ต
                 อาจจำเป็นต้องเข้าคิวและถูกตรวจกระเป๋าอีกรอบ
                 กรุณาเตรียมความพร้อมของตนเอง
-                ก่อนเข้าพื้นที่ชมคอนเสิร์ตเพื่อความสะดวกของตัวท่านเอง
+                ก่อนเข้าพื้นที่ชมคอนเสิร์ตเพื่อความสะดวกของตัวท่านเอง (Food
+                shops and mobile toilets are outside of the concert area.
+                Reentering the concert must be queued in line and pass the
+                security check again. Please prepare yourself before reentering
+                the concert area.)
               </li>
+
               <li>
-                ด้านนอกมีบูธจำหน่ายอาหาร และสุขาเคลื่อนที่
-                หากท่านออกจากพื้นที่ชมคอนเสิร์ต
-                อาจจำเป็นต้องเข้าคิวและถูกตรวจกระเป๋าอีกรอบ
-                กรุณาเตรียมความพร้อมของตนเอง
-                ก่อนเข้าพื้นที่ชมคอนเสิร์ตเพื่อความสะดวกของตัวท่านเอง
+                เพื่อรักษาสิทธิ์ของตนเอง อย่าส่ง QR Code ต่อให้บุคคลอื่น (Do not
+                send the QR code to others.)
               </li>
-              <li>เพื่อรักษาสิทธิ์ของตนเอง อย่าส่ง QR Code ต่อให้บุคคลอื่น</li>
               <li>
                 ไม่อนุญาตให้ผู้ที่อยู่ในอาการมึนเมา หรือ
                 สภาพร่างกายไม่พร้อมสำหรับการชมคอนเสิร์ต
-                เข้าไปในพื้นที่ชมคอนเสิร์ต
+                เข้าไปในพื้นที่ชมคอนเสิร์ต (Audiences with drunkenness or
+                not-ready condition are not allowed to enter the concert.)
               </li>
               <li>
                 หากผู้เข้าร่วมงานฝ่าฝืนกฎ หรือสร้างความวุ่นวาย
-                ขอยกเลิกสิทธิการเข้าชมและขอเชิญออกนอกพื้นที่บริเวณงาน
+                ขอยกเลิกสิทธิการเข้าชมและขอเชิญออกนอกพื้นที่บริเวณงาน (In case
+                of violation to rules or causing disorder, the audience will be
+                forced to leave the concert.)
               </li>
 
               <li>
                 ขอให้ยึดตามระเบียบอย่างเคร่งครัด
-                เพื่อความสะดวกรวดเร็วในการเข้ารับชมคอนเสิร์ต
+                เพื่อความสะดวกรวดเร็วในการเข้ารับชมคอนเสิร์ต (Please strictly
+                follow the regulations for your convenience.)
               </li>
             </ul>
             <p className="text-base font-semibold mt-4">
-              สิ่งที่ไม่อนุญาตให้นำเข้าพื้นที่ชมคอนเสิร์ต
+              สิ่งที่ไม่อนุญาตให้นำเข้าพื้นที่ชมคอนเสิร์ต (Broadcast or live
+              stream to all platforms)
             </p>
             <ul className="list-disc text-sm mt-2">
-              <li>ห้ามถ่ายทอดสด หรือ LIVE ด้วย Application ทุกชนิด</li>
+              <li>
+                ห้ามถ่ายทอดสด หรือ LIVE ด้วย Application ทุกชนิด (Weapons,
+                weapon imitations, sharp objects, hazardous substances, and
+                drugs are prohibited.)
+              </li>
               <li>
                 ห้ามนำอาวุธ สิ่งเทียมอาวุธ ของมีคม วัตถุอันตราย
-                และสารเสพติดทุกชนิดเข้าภายในงาน
-              </li>
-              <li>
-                ห้ามนำเครื่องดื่ม ขวดน้ำดื่ม หรืออาหาร ทุกชนิด
-                จากภายนอกเข้ามาภายในบริเวณพื้นที่ชมคอนเสิร์ต
+                และสารเสพติดทุกชนิดเข้าภายในงาน (Food, drinks, and water bottles
+                cannot enter the concert area.)
               </li>
 
-              <li>ห้ามนำโดรนเข้ามาบินภายในบริเวณงาน</li>
-              <li>ห้ามนำสัตว์เลี้ยงเข้ามาภายในงาน</li>
-              <li>ห้ามสูบบุหรี่ บุหรี่ไฟฟ้า ทุกชนิด</li>
+              <li>ห้ามนำโดรนเข้ามาบินภายในบริเวณงาน (Flying drones)</li>
+              <li>ห้ามนำสัตว์เลี้ยงเข้ามาภายในงาน (Pets)</li>
+              <li>
+                ห้ามสูบบุหรี่ บุหรี่ไฟฟ้า ทุกชนิด (Smoking, e-cigarettes, and
+                vaping)
+              </li>
               <li>
                 ห้ามนำ ป้ายไฟ หรือ แผ่นป้ายเชียร์แบบกระดาษ หรือแผ่นกระดาษ
-                ขนาดเกิน A4 เข้าภายในงาน
+                ขนาดเกิน A4 เข้าภายในงาน (LED or paper sheer signs exceeding A4
+                size are not allowed )
               </li>
-              <li>วัตถุไวไฟ พลุหรือดอกไม้ไฟทุกชนิด</li>
-              <li>ลูกโป่งอัดแก๊ส ลูกโป่งอัดลม กระบองลม ลูกบอลขนาดใหญ่</li>
+              <li>
+                วัตถุไวไฟ พลุหรือดอกไม้ไฟทุกชนิด(Explosives or fireworks )
+              </li>
+              <li>
+                ลูกโป่งอัดแก๊ส ลูกโป่งอัดลม กระบองลม ลูกบอลขนาดใหญ่ (Do not
+                cause any disorder, quarrel, or riot. )
+              </li>
               <li>
                 ห้ามกระทำการใด ๆ ที่ไม่เหมาะสม ซึ่งนำไปสู่ความขัดแย้ง
-                การทะเลาะวิวาท และการจราจล
+                การทะเลาะวิวาท และการจราจล (Privacy Policy: Dissent for
+                Photography and Publishing)
               </li>
             </ul>
             <p className="text-base font-semibold mt-4">
               การคุ้มครองความเป็นส่วนบุคคล :
-              การไม่ยินยอมให้ถ่ายภาพหรือเผยแพร่ภาพ
+              การไม่ยินยอมให้ถ่ายภาพหรือเผยแพร่ภาพ (In case of dissent for
+              photography and publishing, please avoid passing camera areas. If
+              you are in the camera-operating area, it is considered that you
+              are consent to this policy.)
             </p>
             <ul className="list-disc text-sm mt-2">
               <li>
                 หากผู้ชมท่านใดไม่ประสงค์ที่จะยินยอมให้ถ่ายภาพหรือเผยแพร่ภาพให้ท่านเดินเลี่ยงบริเวณที่มีกล้องหากท่านใดอยู่ในบริเวณจุดเผยแพร่ภาพ
-                ถือว่าท่านยินยอมให้ถ่ายหรือเผยแพร่ภาพ
+                ถือว่าท่านยินยอมให้ถ่ายหรือเผยแพร่ภาพ (In case of dissent for
+                photography and publishing, please avoid passing camera areas.
+                If you are in the camera-operating area, it is considered that
+                you are consent to this policy.)
               </li>
             </ul>
           </div>
@@ -270,7 +326,7 @@ export default function Home() {
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <label className="ml-2 text-sm font-medium text-gray-900 ">
-                ยอมรับ
+                ยอมรับ (Accept)
               </label>
             </div>
           </div>
@@ -322,8 +378,8 @@ export default function Home() {
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-center text-xl text-gray-500">
-                          ยินยันการรับสิทธิ์การลงทะเบียนทะเบียนเข้าร่วมงานคอนเสิร์ต
-                          60 ปี
+                          ยืนยันการรับสิทธิ์การลงทะเบียนทะเบียนเข้าร่วมงานคอนเสิร์ต
+                          60 ปี (Confirm your registration to join the concert)
                         </p>
                       </div>
                       <div className="mt-2">
@@ -341,13 +397,13 @@ export default function Home() {
                           //   className="bg-green-500 text-white p-2 rounded-lg cursor-pointer w-full mt-2"
                           onClick={setDataUserTracking}
                         >
-                          ยืนยัน
+                          ยืนยัน (Confirm)
                         </button>
                         <button
                           className="bg-red-500 text-white p-2 rounded-lg cursor-pointer w-full mt-2"
                           onClick={() => setPopup(false)}
                         >
-                          ยกเลิก
+                          ยกเลิก (Cancel)
                         </button>
                       </div>
                     </Dialog.Panel>

@@ -23,7 +23,7 @@ const Serverfull = () => {
       </div>
       <div className="h-50  rounded-lg  text-red-500  text-center">
         <div className="bg-red-100 p-2 rounded-lg">
-          ขนาดนี้จำนวนเปิดรับสมัครเต็มจำนวนแล้ว
+          ขนาดนี้จำนวนเปิดรับสมัครเต็มจำนวน (Registration at full capacity)
         </div>
       </div>
     </div>

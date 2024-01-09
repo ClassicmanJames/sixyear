@@ -22,8 +22,8 @@ const Done = () => {
       </div>
       <div className="h-50  rounded-lg  text-green-500  text-center">
         <div className="bg-green-100 p-2 rounded-lg">
-          คุณได้ลงทะเบียนไปแล้วกรุณารอการยืนยืนจากระบบ (Your registration is
-          complete. Please wait for the confirmation from the system.)
+          คุณได้ลงทะเบียนไปแล้วกรุณารอการยืนยืนจากระบบ <br /> (Your registration
+          is complete. Please wait for the confirmation from the system.)
         </div>
       </div>
     </div>

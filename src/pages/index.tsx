@@ -79,7 +79,7 @@ export default function Home() {
       cit_id: cit_id,
       email: email,
       org_code: org,
-      sts_id: stu,
+      std_id: stu,
       fname: fname,
       lname: lname,
       acctype: acctype,

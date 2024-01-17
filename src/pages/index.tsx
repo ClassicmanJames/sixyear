@@ -10,6 +10,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Setting from "@/redux/reducers/setting";
+import * as User from "@/redux/reducers/user";
 import router from "next/router";
 
 export default function Home() {
@@ -43,8 +44,9 @@ export default function Home() {
     // } else if (stu === "2") {
     //   setStatusType(2);
     // }
-    console.log("citizen_id" + cit_id);
-    console.log(statusType);
+    // console.log("citizen_id" + cit_id);
+    // console.log(statusType);
+    dispath(User.updateState({ accessToken: cit_id }));
     let datasent = {
       fname: fname,
       lname: lname,
@@ -69,7 +71,7 @@ export default function Home() {
       router.push("/result/Serverfull");
     } else if (response.data.status === 43) {
       dispath(Setting.updateState({ isLoadingScreen: true }));
-      router.push("/result/Done");
+      router.push("/qr_code/");
     }
   };
   const setDataUserTracking = async () => {

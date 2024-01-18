@@ -17,12 +17,15 @@ export default function Page() {
   useEffect(() => {
 
     const qrCodeSuccessCallback = async (decodedText: any, decodedResult: any) => {
-      html5QrCode.pause();
       
+
       if(decodedText){
         let data = {
             token: decodedText
-          }
+        }
+        await html5QrCode.pause();
+        //html5QrCode.stop();
+        
         axios.post(
           process.env.NEXT_PUBLIC_CMU_SERVICE + `/checkIn`,
           data,

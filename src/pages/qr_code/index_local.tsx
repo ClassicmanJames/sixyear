@@ -9,7 +9,7 @@ export default function Page() {
     const searchParams = useSearchParams();
     const { SVG } = useQRCode();
     const [tkData, setTkData] = useState([]);
-    const cit_id = searchParams.get("citizen_id") || '1609900595354';
+    const cit_id = searchParams.get("citizen_id") || '1577900005670';
 
     useEffect(() => {
         const getToken = async () => {

@@ -15,7 +15,7 @@ export default function Page() {
   dispath(Setting.updateState({ isLoadingScreen: false }));
   useEffect(() => {
     const getToken = async () => {
-      console.log("22222   " + process.env.NEXT_PUBLIC_CMU_SERVICE);
+      //console.log("22222   " + process.env.NEXT_PUBLIC_CMU_SERVICE);
       const response = await axios.post(
         process.env.NEXT_PUBLIC_CMU_SERVICE + "/setSertTK",
         { cit_id: getUser.accessToken },
@@ -26,7 +26,7 @@ export default function Page() {
         }
       );
       setTkData(response.data.token);
-      console.log(response.data);
+      //console.log(response.data);
     };
     getToken();
   }, []);
@@ -44,7 +44,7 @@ export default function Page() {
       <div className="h-50  rounded-lg  text-green-500  text-center">
         <div className="p-2 rounded-lg text-base">
           <div className="p-2 bg-green-100 rounded-lg">
-            โปรดแสดง Qr Code นี้แก่เจ้าหน้าก่อนเข้างาน <br /> (Please show this
+            โปรดแสดง Qr Code นี้ต่อเจ้าหน้าก่อนเข้างาน <br /> (Please show this
             Qr Code to the staff before entering the event.)
           </div>
 

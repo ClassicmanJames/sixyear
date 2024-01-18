@@ -66,6 +66,7 @@ export default function Home() {
     if (response.data.status === 1) {
       dispath(Setting.updateState({ isLoadingScreen: false }));
       // console.log(response.data.msg);
+      router.push("/result/Serverfull");
     } else if (response.data.status === 2) {
       dispath(Setting.updateState({ isLoadingScreen: true }));
       router.push("/result/Serverfull");

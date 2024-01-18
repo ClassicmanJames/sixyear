@@ -8,6 +8,7 @@ export default function Page() {
   const [scanResult, setScanResult] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [showErr, setShowErr] = useState(false);
+  const [showEnter, setShowEnter] = useState(false);
   const [txtStamp, setTxtStamp] = useState("");
   var html5QrCode:Html5Qrcode;// = new Html5Qrcode("reader");
   
@@ -15,12 +16,9 @@ export default function Page() {
 
   useEffect(() => {
 
-    let dateSmp = new Date();
-    //  + dateSmp.getDate() + "/" + (dateSmp.getMonth() +1) + "/" + dateSmp.getFullYear() + " "
-    setTxtStamp("เข้างาน : " + dateSmp.getHours() + ":" + dateSmp.getMinutes() + ":" + dateSmp.getSeconds());
-
-    //"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRfaWQiOiIxMTQ5NTAwMDA1NTU0IiwiaWF0IjoxNzA1Mzc3MTQxLCJleHAiOjE3MDYyNDExNDF9.F_VR3_7bEpJLFDbMAI4rJK3fVhRXRTq3P_Cr1H9hbho";   
     const qrCodeSuccessCallback = async (decodedText: any, decodedResult: any) => {
+      html5QrCode.pause();
+      
       if(decodedText){
         let data = {
             token: decodedText
@@ -37,14 +35,31 @@ export default function Page() {
           console.log(JSON.stringify(response.data));
           let resData = response.data;
           if(resData.status == 1){
-            setScanResult(`<h1 className="bg-[#50d71e] w-full h- 20 text-3xl">ผ่าน</h1>`);
+            //Pass
+            setShowPass(true);
+            setShowErr(false);
+            setShowEnter(false);
+            let dateSmp = new Date();
+            setTxtStamp("เข้างาน : " + dateSmp.getHours() + ":" + dateSmp.getMinutes() + ":" + dateSmp.getSeconds());
+          }else if(resData.status == 2){
+            // entered
+            setShowPass(false);
+            setShowEnter(true);
+            setShowErr(false);
+            let dateSmp = (resData.data).toString();
+            //console.log(dateSmp.getHours() + ":" + dateSmp.getMinutes() + ":" + dateSmp.getSeconds() + " ppppp " + dateSmp)
+            setTxtStamp("เข้างานแล้ว : " + dateSmp.substr(11, 8));
           }else{
-            setScanResult(`<h1 className="bg-[#ff3333] w-full h- 20 text-3xl">ไม่ผ่าน</h1>`);
+            //Not Pass
+            setTxtStamp("ไม่มีสิทธิ์เข้างาน");
+            setShowPass(false);
+            setShowErr(true);
+            setShowEnter(false);
           }
-          html5QrCode.pause();
+          // html5QrCode.pause();
           //html5QrCode.stop();
           html5QrCode.clear();
-          setShowPass(false);
+          
         })
         .catch((error) => {
           console.log(error);
@@ -61,10 +76,16 @@ export default function Page() {
 
   //////////
   const openCame = () => {
+    setShowPass(false);
+    setShowErr(false);
+    setShowEnter(false);
+    setTxtStamp("");
+
     if(html5QrCode){
       html5QrCode.resume();
     }else{              
       const qrCodeSuccessCallback = async (decodedText: any, decodedResult: any) => {
+        html5QrCode.pause();
         if(decodedText){
           let data = {
               token: decodedText
@@ -81,16 +102,26 @@ export default function Page() {
             console.log(JSON.stringify(response.data));
             let resData = response.data;
             if(resData.status == 1){
-              setScanResult(`<h1 className="bg-[#50d71e] w-full h- 20 text-3xl">ผ่าน</h1>`);
+              //Pass
               setShowPass(true);
-            }else if(resData.status == 2){
-              let dateSmp = new Date(resData.stamp);
-              //+ dateSmp.getDate() + "/" + (dateSmp.getMonth() +1) + "/" + dateSmp.getFullYear() + " " 
+              setShowErr(false);
+              setShowEnter(false);
+              let dateSmp = new Date();
               setTxtStamp("เข้างาน : " + dateSmp.getHours() + ":" + dateSmp.getMinutes() + ":" + dateSmp.getSeconds());
+            }else if(resData.status == 2){
+              // entered
               setShowPass(false);
-            }
-            else{
-              setScanResult(`<h1 className="bg-[#ff3333] w-full h- 20 text-3xl">ไม่ผ่าน</h1>`);
+              setShowEnter(true);
+              setShowErr(false);
+              let dateSmp = (resData.data).toString();
+              //console.log(dateSmp.getHours() + ":" + dateSmp.getMinutes() + ":" + dateSmp.getSeconds() + " ppppp " + dateSmp)
+              setTxtStamp("เข้างานแล้ว : " + dateSmp.substr(11, 8));
+            }else{
+              //Not Pass
+              setTxtStamp("ไม่มีสิทธิ์เข้างาน");
+              setShowPass(false);
+              setShowErr(true);
+              setShowEnter(false);
             }
             html5QrCode.pause();
             //html5QrCode.stop();
@@ -125,6 +156,9 @@ export default function Page() {
         </div>
         <div style={{ display: showErr ? "block" : "none" }} className="text-center my-4">
           <h1 className="bg-[#EB3E3E] w-full h- 20 text-3xl p-2 text-[#292929]">ไม่ผ่าน</h1>
+        </div>
+        <div style={{ display: showEnter ? "block" : "none" }} className="text-center my-4">
+          <h1 className="bg-[#EB3E3E] w-full h- 20 text-3xl p-2 text-[#292929]">ใช้สิทธิ์แล้ว</h1>
         </div>
         <div className="flex justify-center my-4 h-auto" >
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-56 h-14 rounded-lg" onClick={() => openCame()} >

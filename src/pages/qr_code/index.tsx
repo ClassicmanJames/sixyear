@@ -25,8 +25,13 @@ export default function Page() {
           },
         }
       );
-      setTkData(response.data.token);
-      //console.log(response.data);
+      // setTkData(response.data.token);
+      if (response.data.status == 3) {
+        router.push("/result/Already");
+      } else {
+        setTkData(response.data.token);
+      }
+      //  console.log(response.data);
     };
     getToken();
   }, []);

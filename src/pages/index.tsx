@@ -73,6 +73,9 @@ export default function Home() {
     } else if (response.data.status === 43) {
       dispath(Setting.updateState({ isLoadingScreen: true }));
       router.push("/qr_code/");
+    } else if (response.data.status === 3) {
+      dispath(Setting.updateState({ isLoadingScreen: true }));
+      router.push("/Done/Already");
     }
   };
   const setDataUserTracking = async () => {
